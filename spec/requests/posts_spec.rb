@@ -1,13 +1,14 @@
 require "rails_helper" 
+require "byebug"
 
 RSpec.describe "Posts", type: :request do
     describe "GET /posts" do
         before { get '/posts' }
-    
         it "should return OK" do
           payload = JSON.parse(response.body)
           expect(payload).to be_empty
           expect(response).to have_http_status(200)
+          byebug
         end
       end
     

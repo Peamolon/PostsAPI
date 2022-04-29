@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
-    email { Faker::Internet.email }
-    name { Faker::Name.name }
-    auth_token { "xxxx" }
+    email { "emailprueba@THISPART.com" }
+    name { "Javier Alonso" }
+    auth_token { Faker::Config.random.seed}
   end
 end

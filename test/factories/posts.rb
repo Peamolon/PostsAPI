@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :post do
-    title { Faker::Lorem.sentence }
-    content { Faker::Lorem.paragraph }
+    title { "El titulo" }
+    content { "El contenido" }
     published { 
       if rand(2) == 0
         true
