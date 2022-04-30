@@ -49,6 +49,21 @@ RSpec.describe "Posts", type: :request do
             expect(payload["id"]).to_not be_nil
             expect(response).to have_http_status(:created)
         end 
+
+        it "should return an error if the post is not valid" do
+            req_payload = {
+                post: { 
+                    content: "Post content",
+                    published: false,
+                    user_id: user.id
+                }
+            }
+            post "/posts", params: req_payload
+            payload = JSON.parse(response.body)
+            expect(payload).to_not be_empty
+            expect(payload["error"]).to_not be_empty
+            expect(response).to have_http_status(:unprocessable_entity)
+        end
     end
     describe "PUT /posts/{id}" do 
         let!(:article) {create(:post)}
@@ -66,5 +81,22 @@ RSpec.describe "Posts", type: :request do
             expect(payload["id"]).to eq(article.id)
             expect(response).to have_http_status(:ok)
         end
+
+        it "should return an error if the post is not valid" do
+            req_payload = {
+                post: {
+                    title: nil,
+                    content: nil,
+                    published: true
+                }
+            }
+            put "/posts/#{article.id}", params: req_payload
+            payload = JSON.parse(response.body)
+            expect(payload).to_not be_empty
+            expect(payload["error"]).to_not be_empty
+            expect(response).to have_http_status(:unprocessable_entity)
+        end
     end
+
+
 end
