@@ -11,4 +11,12 @@ FactoryBot.define do
      }
     user 
   end
+
+  factory :published_post, class: 'Post' do
+    title { "El titulo post publicado" }
+    content { "El contenido piblicado" }
+    published { true }
+    user 
+  end
+
 end
